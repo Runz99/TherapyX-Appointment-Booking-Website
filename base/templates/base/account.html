@@ -1,0 +1,120 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% if user.is_staff == 0 %}
+    <div>
+        <h2>ACCOUNT</h2>
+        <p>Hello {{user.username}}!</p>
+    </div>
+    <div>
+        <h3>Personal Information: </h3>
+        <p>First Name: {{user.first_name}} </p>
+        <p>Last Name: {{user.last_name}}</p>
+        <p>Username: {{user.username}}</p>
+    </div>
+
+    <br>
+    {% if appointments.count > 0 %}
+        <div>
+            <h3>Upcoming Appointment:</h3>
+            <div>
+                {% for appointment in appointments %}
+                <p>Day: {{appointment.day}}</p>
+                <p>Time: {{appointment.time}}</p>
+                <br>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+    <p>No appointments booked!</p>
+    {% endif %}
+
+{% else %}
+    <div>
+        <h2>Admin Panel</h2>
+        <p>Hello {{user.username}}!</p>
+    </div>
+
+    <div>
+        <input type="text" placeholder="Search Appointment">
+    </div>
+    <div>
+      <br>
+      <h3>Upcoming Appointments</h3>
+    </div>
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        th, td {
+          padding: 8px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+        }
+        
+        tr:hover {background-color: rgb(93, 175, 120);}
+    </style>
+    
+    <div class="table-responsive">
+        <table>
+            <thead>
+              <tr>
+                <th class="text-center" scope="col">Time</th>
+                <th class="text-center" scope="col">Username</th>
+                <!-- <th class="text-center" scope="col">First Name</th> -->
+                <!-- <th class="text-center" scope="col">Last Name</th> -->
+                <th class="text-center" scope="col">Date</th>
+                <th class="text-center" scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="myTable">
+                {% for item in items %}
+              <tr>
+                <td class="text-center">{{item.time}}</td>
+                <td class="text-center">{{item.user.username}}</td>
+                <!-- <td class="text-center">{{item.user.first_name}}</td> -->
+                <!-- <td class="text-center">{{item.user.last_name}}</td> -->
+                <td class="text-center">{{item.day}}</td>
+                <td class="text-center"><a href=""></a><input type="submit" value="Cancel/Reschedule"></a></td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <br>
+          <h3>Previous Appointments</h3>
+        </div>
+        <div class="table-responsive">
+          <table>
+              <thead>
+                <tr>
+                  <th class="text-center" scope="col">Time</th>
+                  <th class="text-center" scope="col">Username</th>
+                  <!-- <th class="text-center" scope="col">First Name</th> -->
+                  <!-- <th class="text-center" scope="col">Last Name</th> -->
+                  <th class="text-center" scope="col">Date</th>
+                  <th class="text-center" scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody id="myTable">
+                  {% for prev in prevs %}
+                <tr>
+                  <td class="text-center">{{prev.time}}</td>
+                  <td class="text-center">{{prev.user.username}}</td>
+                  <!-- <td class="text-center">{{prev.user.first_name}}</td> -->
+                  <!-- <td class="text-center">{{prev.user.last_name}}</td> -->
+                  <td class="text-center">{{prev.day}}</td>
+                  <td class="text-center">Completed</td>
+                </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+          </div>
+{% endif %}
+
+
+{% endblock %}

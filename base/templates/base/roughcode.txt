@@ -1,0 +1,48 @@
+# # context = {}
+    # # return render(request, 'base/book_session.html', context)
+    # # clientsNum = User.objects.count()
+    # # clients = clientList(clientsNum)
+
+# user = User.objects.get(username=request.user.username)
+    # clientsNum = User.objects.count()
+    # clients = clientList(clientsNum)
+    # weekdays = validWeekday(22)
+    # validateWeekdays = isWeekdayValid(weekdays)
+
+    # if User.objects.filter(username=user).values('is_staff')==1:
+    #     if request.method == "POST":
+    #         client = request.POST.get('client')
+    #         appt_day = request.POST.get('appt_day')
+
+    #         #store day in django session
+    #         request.session['user'] = client
+    #         request.session['appt_day'] = appt_day
+
+    #         return redirect('bookingSubmit')
+
+    # else:
+    #     if request.method == "POST":
+    #         appt_day = request.POST.get('appt_day')
+
+    #         #store day in django session
+    #         request.session['user'] = user
+    #         request.session['appt_day'] = appt_day
+
+    #         return redirect('bookingSubmit')
+#, 'clientsNum':clientsNum, 'clients':clients
+
+
+
+================================================================
+
+else:
+        if request.method == "POST":
+            client = request.POST.get('client')
+            clientField = User.objects.get(username = client)
+            appt_day = request.POST.get('appt_day')
+
+            #store day in django session
+            request.session['user'] = clientField
+            request.session['appt_day'] = appt_day
+
+            return redirect('bookingSubmit')

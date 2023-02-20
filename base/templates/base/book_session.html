@@ -1,0 +1,66 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% if user.is_staff == 0 %}
+<div>
+    <h2>Book a session!</h2>
+</div>
+
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <div>
+            <label for="appt_day">Choose a day for your appointment</label>
+            <select name="appt_day">
+                {% for validateWeekday in validateWeekdays %}
+                <option value="{{validateWeekday}}">{{validateWeekday}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <a href="{% url 'bookingSubmit' %}">
+                <input type="submit" value="Continue">
+            </a>
+        </div>
+    </form>
+    
+</div>
+
+{% else %}
+<div>
+    <h2>Admin Booking</h2>
+</div>
+
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <div>
+            <label for="user">Select a client</label>
+            <select name="user">
+                {% for client in clients %}
+                <option value="{{customer}}">{{customer}}</option>
+                {% endfor %}
+            </select>
+            <br>
+
+            <label for="appt_day">Choose a day for your appointment</label>
+            <select name="appt_day">
+                {% for validateWeekday in validateWeekdays %}
+                <option value="{{validateWeekday}}">{{validateWeekday}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <a href="{% url 'bookingSubmit' %}">
+                <input type="submit" value="Continue">
+            </a>
+        </div>
+    </form>
+    
+</div>
+
+{% endif %}
+{% endblock %}

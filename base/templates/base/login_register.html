@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="{% static 'C:\Users\sgtar\Desktop\testbooking1\myenv\Lib\site-packages\django\contrib\admin\static\admin\css\loginPage.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="title"><span>Login Form</span></div>
+            <form method="POST" action="">
+                {% csrf_token %}
+
+                {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{request.GET.next}}">
+                {% endif %}
+                <div class="row">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name='username' placeholder="username" required>
+                </div>
+                <div class="row">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="pass"><a href="#">Forgot Password?</a></div>
+                <div class="row button">
+                    <input type="submit" value="Login">
+                </div>
+
+                <div class="sign-up-link">Not a member? <a href="{% url 'register' %}">Sign up here!</a></div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

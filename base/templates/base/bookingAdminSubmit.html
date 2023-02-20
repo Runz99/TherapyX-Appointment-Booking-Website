@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <!-- SELECT TIME -->
+        <h3>Time: </h3>
+        <div>
+            <select name="time">
+                {% for time in times %}
+                <option value="{{time}}">{{time}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

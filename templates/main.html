@@ -1,0 +1,47 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TherapyX</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'C:\Users\sgtar\Desktop\testbooking1\myenv\Lib\site-packages\django\contrib\admin\static\admin\css\style.css' %}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<body>
+    <nav>
+        <!-- {% load static %}
+        <a href=""><img class='logo' src="{% static 'C:\Users\sgtar\Desktop\testbooking1\myenv\Lib\site-packages\django\contrib\admin\static\admin\img\testLogo2.png' %}"/></a>
+        <hr> -->
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">TherapyX</label>
+        <ul>
+            <li><a class="active" href="{% url 'home' %}">Home</a></li>
+            {% if request.user.is_authenticated and request.user.is_staff %}
+            <li><a href="{% url 'bookAdmin' %}">Book a session</a></li>
+            {% else %}
+            <li><a href="{% url 'booking' %}">Book a session</a></li>
+            {% endif %}
+            <li><a href="{% url 'account' %}">Account</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login/Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <!-- <section></section> -->
+
+    {% block content %}
+
+    {% endblock content %}
+
+    
+</body>
+</html>
